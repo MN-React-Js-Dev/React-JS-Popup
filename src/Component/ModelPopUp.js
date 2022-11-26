@@ -15,8 +15,17 @@ const ModelPopUp = () => {
 
     function handleBtn() {
         setflag(true)
+        // setinputes({
+        //     address: "",
+        //     email: ""
+        // })
+        // seterror({
+        //     address: "",
+        //     email: ""
+        // })
     }
-    const handleClose = (e) => {
+    const handleClose = () => {
+        setsubmit(false)
         setflag(false)
         setinputes({
             address: "",
@@ -26,7 +35,7 @@ const ModelPopUp = () => {
             address: "",
             email: ""
         })
-     }
+    }
 
 
 
@@ -57,37 +66,29 @@ const ModelPopUp = () => {
     }
     useEffect(() => {
         if (Object.keys(errors).length === 0 && Object.keys(inputes).length !== 0) {
-            console.log(errors, "error")
+            console.log(errors, "error useefact")
         }
-    }, [inputes])
+    }, [])
 
-    const clearInputField=()=>{
+    const clearInputField = () => {
         setinputes({
             address: "",
             email: ""
         })
-         
-        // console.log(inputes,"clear input")
-        // console.log(errors,"clear errors")
-
     }
-    
-    
+
+
     const handleSubmit = (e) => {
-        setsubmit(true)
+        e.preventDefault()
+        setsubmit(true)        
         seterror(validate(inputes));
-        // console.log(errors, " submit errors errors")
+        console.log(errors, " submit -----> errors errors")
 
         if (inputes.email !== "" && inputes.address !== "") {
             setflag(false)
-            setinputes({
-                address: "",
-                email: ""
-            })
-            seterror({
-                address: "",
-                email: ""
-            })
+            setinputes({ address: "", email: "" })
+            seterror({ address: "", email: "" })
+
             var paylod = {
                 email: inputes.email,
                 address: inputes.address
